@@ -9,11 +9,11 @@ features <- features$V2
 
 #reading all required data with names assigned
 x_test <- fread("X_test.txt",col.names = features)
-y_test <- fread("y_test.txt",col.names = activity)
-subject_test <- fread("subject_test.txt",col.names = subject)
+y_test <- fread("y_test.txt",col.names = "activity")
+subject_test <- fread("subject_test.txt",col.names = "subject")
 x_train <- fread("X_train.txt",col.names = features)
-y_train <- fread("y_train.txt",col.names = activity)
-subject_test <- fread("subject_test.txt",col.names = subject)
+y_train <- fread("y_train.txt",col.names = "activity")
+subject_train <- fread("subject_train.txt",col.names = "subject")
 
 #mergin data
 test <- cbind(subject_test,y_test,x_test)
@@ -23,9 +23,9 @@ data <- rbind(test,train)
 # Step 2 - Extracts only the measurements on the mean and standard deviation for each measurement.
 # ------------------------------------------------------------------------------
 
-a <- grepl("mean|std",names(data))
+a <- grepl("subject|activity|mean|std",names(data))
 b<-names(data)[a]
-x <- subset(data,select = b)
+data <- subset(data,select = b)
 
 
 # Step 3 - Uses descriptive activity names to name the activities in the data set
